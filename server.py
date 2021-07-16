@@ -24,7 +24,7 @@ def show_all_movies():
 
     return render_template("all_movies.html", movies=movies)
 
-@app.route("/movie/<movie_id>")
+@app.route("/movies/<movie_id>")
 def show_movie_details(movie_id):
     """Show the details of a specific movie."""
 
@@ -38,6 +38,15 @@ def show_all_users():
     users = crud.get_all_users()
 
     return render_template("all_users.html", users=users)
+
+
+@app.route("/users/<user_id>")
+def show_user_profile(user_id):
+
+    user = crud.get_user_by_id(user_id)
+    ratings = crud.get_ratings_by_user_id(user_id)
+
+    return render_template("user_profile.html", user=user, ratings=ratings)
 
 if __name__ == "__main__":
     # DebugToolbarExtension(app)
