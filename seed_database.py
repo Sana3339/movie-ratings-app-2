@@ -31,5 +31,18 @@ for movie in movie_data:
 
     release_date = datetime.strptime(movie["release_date"], "%Y-%m-%d")
 
-    db_movie = crud.create_movie(title, overview, release_date, poster_path))
+    db_movie = crud.create_movie(title, overview, release_date, poster_path)
     movies_in_db.append(movie)
+
+
+#Create fake users with unique email addresses.
+#For each fake user, generate 10 fake ratings for the user
+
+for n in range(10):
+    email = f'user{n}@test.com'
+    password = 'test'
+
+    for n in range(10):
+
+
+#Choose a random movie and generate a random score for the movie
