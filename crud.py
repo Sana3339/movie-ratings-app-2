@@ -24,10 +24,16 @@ def get_user_by_id(user_id):
 
     return User.query.get(user_id)
 
+
 def get_ratings_by_user_id(user_id):
     """Returns all ratings for a particular user id."""
 
     return Rating.query.filter(Rating.user_id == user_id).all()
+
+def get_user_by_email(email):
+    """If an email exists in db, return user.  If not, returns None"""
+
+    return User.query.filter(User.email == email).first()
 
 
 def create_movie(title, overview, release_date, poster_path):
