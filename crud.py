@@ -13,6 +13,7 @@ def create_user(email, password):
 
     return user
 
+
 def create_movie(title, overview, release_date, poster_path):
     """Create and return a new movie."""
 
@@ -26,6 +27,18 @@ def create_movie(title, overview, release_date, poster_path):
 
     return movie
 
+
+def get_all_movies():
+    """Returns all movies in the db."""
+
+    return Movie.query.all()
+
+
+def get_movie_by_id(movie_id):
+
+    return Movie.query.get(movie_id)
+
+
 def create_rating(score, movie, user):
     """Create and return a new rating."""
 
@@ -37,13 +50,6 @@ def create_rating(score, movie, user):
     db.session.commit()
 
     return rating
-
-def get_all_movies():
-    """Returns all movies in the db."""
-
-    movies = Movie.query.all()
-
-    return movies
 
 
 #Code below connects us to the db when we run crud.py interactively
