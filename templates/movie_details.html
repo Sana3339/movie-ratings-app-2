@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}{{ movie.title }} Details{% endblock %}
+{% block title %}{{ movie.title }} Details {% endblock %}
 
 {% block body %}
     <h1>{{ movie.title }}</h1>
@@ -7,6 +7,24 @@
     <p>
         {{ movie.overview }}
     </p>
+
+    {% if session.get('user_id') %}
+
+        <h2>Rate this movie:</h2>
+
+        <form action="/movies/{{ movie.movie_id }}/ratings" method = "POST">
+            Rating: <select name="rating">
+                        <option value="Select rating">Select Rating</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                <input type="submit">
+        </form> <br>
+
+    {% endif %}
 
     <img src="{{movie.poster_path}}" alt="movie_pic" width="250">
 

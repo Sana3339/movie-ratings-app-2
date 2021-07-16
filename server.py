@@ -16,6 +16,7 @@ def homepage():
 
     return render_template("homepage.html")
 
+
 @app.route("/movies")
 def show_all_movies():
     """View a list of all movies in the db."""
@@ -76,11 +77,10 @@ def login_user():
 
     if user:
         if user.password == password:
-            user_id = user.user_id
-            session["user_id"] = user_id
+            session["user_id"] = user.user_id
             flash("You are now logged in!")
 
-            return redirect(f'/users/{user_id}')
+            return redirect(f'/users/{user.user_id}')
 
         if user.password != password:
             flash("Password is incorrect. Please try again.")
@@ -90,6 +90,30 @@ def login_user():
         if not user:
             flash("Email isn't registered. Please create an account.")
             return redirect("/")
+
+
+@app.route("/logout")
+def logout():
+
+    session.pop("user_id")
+
+    return redirect("/")
+
+
+@app.route("/movies/<movie_id>/ratings", methods=["POST"])
+def rate_movie(movie_id):
+    """Create a new rating for a movie."""
+
+    user_id = session.get("user_id")
+    rating_score = request.form.get("rating")
+
+    user = crud.get_user_by_id(user_id)
+    movie = crud.get_movie_by_id(movie_id)
+
+    crud.create_rating(user, movie, int(rating_score))
+    flash('You have rated the movie successfully.')
+
+    return redirect(f'/users/{user_id}')
 
 
 if __name__ == "__main__":

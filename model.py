@@ -15,8 +15,6 @@ class User(db.Model):
     password = db.Column(db.String)
 
     def __repr__(self):
-        """Show info about user."""
-
         return f'<User_id = {self.user_id}, email = {self.email}>'
 
 class Movie(db.Model):
@@ -24,14 +22,13 @@ class Movie(db.Model):
 
     __tablename__ = 'movies'
 
-    movie_id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    movie_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String)
-    overview = db.Column(db.String)
+    overview = db.Column(db.Text)
     release_date = db.Column(db.DateTime)
     poster_path = db.Column(db.String)
 
     def __repr__(self):
-
         return f'<Movie_id = {self.movie_id}, title = {self.title}>'
 
 class Rating(db.Model):
@@ -48,7 +45,6 @@ class Rating(db.Model):
     user = db.relationship('User', backref = 'ratings')
 
     def __repr__(self):
-
         return f'<Rating_id = {self.rating_id}, score = {self.score}>'
 
 

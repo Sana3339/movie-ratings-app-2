@@ -38,7 +38,7 @@ for movie in movie_data:
 #Create fake users with unique email addresses.
 #For each user, generate 10 fake movie ratings
 
-for n in range(1,10):
+for n in range(10):
     email = f'user{n}@test.com'
     password = 'test'
 
@@ -46,7 +46,7 @@ for n in range(1,10):
 
     for n in range(10):
 
+        random_movie = choice(movies_in_db)
         score = randint(1,5)
-        movie = choice(movies_in_db)
 
-        db_rating = crud.create_rating(score, movie, user)
+        crud.create_rating(user, random_movie, score)

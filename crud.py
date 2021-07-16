@@ -13,6 +13,7 @@ def create_user(email, password):
 
     return user
 
+
 def get_all_users():
     """Returns all users in db."""
 
@@ -30,10 +31,12 @@ def get_ratings_by_user_id(user_id):
 
     return Rating.query.filter(Rating.user_id == user_id).all()
 
+
 def get_user_by_email(email):
     """If an email exists in db, return user.  If not, returns None"""
 
     return User.query.filter(User.email == email).first()
+
 
 def check_password_for_user(email,password):
     """Given an user's email, check if the password is correct. Returns True or False."""
@@ -70,12 +73,10 @@ def get_movie_by_id(movie_id):
     return Movie.query.get(movie_id)
 
 
-def create_rating(score, movie, user):
+def create_rating(user, movie, score):
     """Create and return a new rating."""
 
-    rating = Rating(score = score,
-                    movie = movie,
-                    user = user)
+    rating = Rating(user=user, movie=movie, score=score)
 
     db.session.add(rating)
     db.session.commit()
