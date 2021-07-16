@@ -66,6 +66,31 @@ def register_user():
 
     return redirect("/")
 
+@app.route("/login", methods=["POST"])
+def login_user():
+
+    email = request.form.get("email")
+    password = request.form.get("password")
+
+    user = crud.get_user_by_email(email)
+
+    if user:
+        if user.password == password:
+            user_id = user.user_id
+            session["user_id"] = user_id
+            flash("You are now logged in!")
+
+            return redirect(f'/users/{user_id}')
+
+        if user.password != password:
+            flash("Password is incorrect. Please try again.")
+            return redirect("/")
+
+    else:
+        if not user:
+            flash("Email isn't registered. Please create an account.")
+            return redirect("/")
+
 
 if __name__ == "__main__":
     # DebugToolbarExtension(app)

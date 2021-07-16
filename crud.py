@@ -35,6 +35,15 @@ def get_user_by_email(email):
 
     return User.query.filter(User.email == email).first()
 
+def check_password_for_user(email,password):
+    """Given an user's email, check if the password is correct. Returns True or False."""
+
+    user = User.query.filter(User.email == email).first()
+
+    if user.password == password:
+        return True
+
+    return False
 
 def create_movie(title, overview, release_date, poster_path):
     """Create and return a new movie."""
