@@ -38,6 +38,13 @@ def create_rating(score, movie, user):
 
     return rating
 
+def get_all_movies():
+    """Returns all movies in the db."""
+
+    movies = Movie.query.all()
+
+    return movies
+
 
 #Code below connects us to the db when we run crud.py interactively
 if __name__ == '__main__':
