@@ -27,7 +27,7 @@ def create_movie(title, overview, release_date, poster_path):
     return movie
 
 def create_rating(score, movie, user):
-    """Craete and return a new rating."""
+    """Create and return a new rating."""
 
     rating = Rating(score = score,
                     movie = movie,
